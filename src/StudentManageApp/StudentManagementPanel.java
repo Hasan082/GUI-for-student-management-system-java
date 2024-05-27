@@ -12,6 +12,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
    
     private final HashMap<String, String> studentMap;
     private Object tableModel;
+    
        
     public StudentManagementPanel() {
         initComponents();
@@ -20,6 +21,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(850, 550);
         setLocationRelativeTo(null);
+        updatePanelWrapper.setVisible(false);
 
     }
 
@@ -50,8 +52,9 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         findId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         updateStudent = new javax.swing.JButton();
-        ShowName = new javax.swing.JTextField();
+        updatePanelWrapper = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        ShowName = new javax.swing.JTextField();
         UpdateInfo = new javax.swing.JButton();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -77,6 +80,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
 
         AddStudentPanel.setBackground(new java.awt.Color(51, 51, 51));
         AddStudentPanel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
@@ -105,7 +109,6 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         addStudentMenu.setBackground(new java.awt.Color(51, 51, 51));
         addStudentMenu.setForeground(new java.awt.Color(255, 255, 255));
         addStudentMenu.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        addStudentMenu.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         addStudentMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 addStudentMenuComponentHidden(evt);
@@ -114,6 +117,8 @@ public class StudentManagementPanel extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        StudentTable.setBackground(new java.awt.Color(0, 0, 0));
+        StudentTable.setForeground(new java.awt.Color(255, 255, 255));
         StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -131,20 +136,26 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         addStudentMenu.addTab("View Student", jPanel2);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setText("Id");
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Id:");
 
+        id.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name:");
 
         name.setText("Student Name");
@@ -169,7 +180,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addStudentBtn)
+                    .addComponent(addStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -178,7 +189,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(id)
                             .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))))
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(451, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,9 +202,9 @@ public class StudentManagementPanel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
-                .addComponent(addStudentBtn)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(addStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         addStudentMenu.addTab("Add Student", jPanel1);
@@ -205,29 +216,63 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         jLabel6.setText("Student id:");
 
         updateStudent.setText("Find Student");
+        updateStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStudentActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Name:");
 
         UpdateInfo.setText("Update Info");
+        UpdateInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateInfoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout updatePanelWrapperLayout = new javax.swing.GroupLayout(updatePanelWrapper);
+        updatePanelWrapper.setLayout(updatePanelWrapperLayout);
+        updatePanelWrapperLayout.setHorizontalGroup(
+            updatePanelWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(updatePanelWrapperLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel3)
+                .addGap(90, 90, 90)
+                .addComponent(ShowName, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addGap(100, 100, 100))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelWrapperLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+        updatePanelWrapperLayout.setVerticalGroup(
+            updatePanelWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(updatePanelWrapperLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(updatePanelWrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ShowName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(UpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(updateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(77, 77, 77)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(updatePanelWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(updateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(jLabel6)
-                            .addComponent(jLabel3))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(findId)
-                            .addComponent(ShowName, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
-                    .addComponent(UpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(279, Short.MAX_VALUE))
+                            .addGap(56, 56, 56)
+                            .addComponent(findId, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,15 +281,11 @@ public class StudentManagementPanel extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(findId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addComponent(updateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ShowName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(44, 44, 44)
-                .addComponent(UpdateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(updatePanelWrapper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         addStudentMenu.addTab("Update Student", jPanel3);
@@ -256,10 +297,10 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AddStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(addStudentMenu))
-                    .addComponent(AddStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(addStudentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,7 +308,8 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(AddStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addStudentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(addStudentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         AddStudentPanel.getAccessibleContext().setAccessibleDescription("");
@@ -286,6 +328,14 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
         addStudent();
     }//GEN-LAST:event_addStudentBtnActionPerformed
+
+    private void updateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStudentActionPerformed
+       updateStudent();
+    }//GEN-LAST:event_updateStudentActionPerformed
+
+    private void UpdateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoActionPerformed
+        UpdateInfotoHashMap();
+    }//GEN-LAST:event_UpdateInfoActionPerformed
 
     
     
@@ -346,8 +396,10 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField name;
+    private javax.swing.JPanel updatePanelWrapper;
     private javax.swing.JButton updateStudent;
     // End of variables declaration//GEN-END:variables
+    
 
     private void addStudent() {
         
@@ -370,8 +422,22 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     }
 }
 
+private void updateStudent() {
+    String idToUpdate = findId.getText();
+    if (idToUpdate != null && !idToUpdate.isEmpty()) {
+        if (studentMap.containsKey(idToUpdate)) {
+            String currentName = studentMap.get(idToUpdate);
+            ShowName.setText(currentName);
+            findId.setEnabled(false);
+            updatePanelWrapper.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Student with ID " + idToUpdate + " not found!");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid student ID. Please enter a valid ID.");
+    }
+}
 
-    
     
     
     
@@ -386,5 +452,22 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     
     
 }
+
+    private void UpdateInfotoHashMap() {
+        String updatedId = findId.getText();
+        String updateName = ShowName.getText();
+        if(!updateName.isEmpty() && !updatedId.isEmpty()){
+            studentMap.put(updatedId, updateName);
+            findId.setText(""); 
+            ShowName.setText("");
+            updateStudentTable();
+            findId.setEnabled(true);
+            updatePanelWrapper.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Student updated successfully!");
+        }else {
+            
+        }
+        
+    }
 
 }
