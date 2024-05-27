@@ -1,25 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package StudentManageApp;
 
+import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hasan
  */
 public class EnrolledListDisplay extends javax.swing.JFrame {
+    
+    private DefaultTableModel tableModel;
 
     /**
      * Creates new form EnrolledListDisplay
      */
     public EnrolledListDisplay() {
         initComponents();
-        setTitle("Enrolled Course List");
+        setTitle("Course Enrolled List");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        tableModel = new DefaultTableModel(new Object[]{"Student ID", "Name", "Enrolled Courses"}, 0);
+        showTableData();
     }
 
     /**
@@ -35,6 +38,7 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         enrolledlistTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,23 +60,32 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         jLabel1.setText("Course Enrolled List");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(319, 319, 319)
+                .addGap(24, 24, 24)
+                .addComponent(jButton1)
+                .addGap(217, 217, 217)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(362, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -97,6 +110,12 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CourseEnrollmentPanel cep = new CourseEnrollmentPanel();
+        cep.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,17 +145,39 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EnrolledListDisplay().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EnrolledListDisplay().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable enrolledlistTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+   private void showTableData() {
+    // Clear the existing data in the table model
+    tableModel.setRowCount(0);
+
+    // Get the course enrollments data
+    Map<String, ArrayList<String>> courseList = CourseEnrollmentPanel.courseEnrollments;
+
+    // Iterate through the course enrollments data and add rows to the table model
+    for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
+        String studentId = entry.getKey();
+        ArrayList<String> courses = entry.getValue();
+        String studentName = StudentManagementPanel.studentMap.get(studentId);
+        String coursesStr = String.join(", ", courses);
+        
+        // Add row to table model
+        tableModel.addRow(new Object[]{studentId, studentName, coursesStr});
+    }
+}
+
+
+
+
 }
