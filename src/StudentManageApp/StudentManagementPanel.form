@@ -313,9 +313,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="name">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Student Name"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="addStudentBtn">
               <Properties>

@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
     private final DefaultListModel<String> studentListModel;
-    private final Map<String, ArrayList<String>> courseEnrollments; 
+    public static Map<String, ArrayList<String>> courseEnrollments; 
     
     public CourseEnrollmentPanel() {
         courseEnrollments = new HashMap<>();
@@ -37,17 +37,24 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
             courseDropdown.addItem(courseName);
         }
         
-       Map<String, String> studentMap = StudentManagementPanel.studentMap;
+        Map<String, String> studentMap = StudentManagementPanel.studentMap;
 
         studentList.removeAll();
 
         // Iterate through the values (student names) of the studentMap and add them to the model
-        for (String studentName : studentMap.values()) {
-            studentListModel.addElement(studentName);
+        if(!studentMap.isEmpty()) {
+            
+            for (String studentName : studentMap.values()) {
+                studentListModel.addElement(studentName);
+                // Set the model to the studentList
+                studentList.setModel(studentListModel);
+            }
+        }else {
+            
         }
+        
 
-        // Set the model to the studentList
-        studentList.setModel(studentListModel);
+        
         
         
     }
@@ -226,7 +233,7 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
     private void enrollBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollBtnActionPerformed
         enrollStudent();
-        System.out.println(courseEnrollments);
+        
     }//GEN-LAST:event_enrollBtnActionPerformed
     //Add new corse
     private void NewCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewCourseBtnActionPerformed
@@ -237,8 +244,9 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_NewCourseBtnActionPerformed
 
     private void enrolledListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrolledListActionPerformed
-        
-        this.dispose();
+         EnrolledListDisplay eld = new EnrolledListDisplay();
+         eld.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_enrolledListActionPerformed
 
     /**

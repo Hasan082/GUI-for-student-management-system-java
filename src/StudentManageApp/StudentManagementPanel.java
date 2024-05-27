@@ -10,13 +10,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class StudentManagementPanel extends javax.swing.JFrame {
    
-    public static HashMap<String, String> studentMap;
+    public static HashMap<String, String> studentMap = new HashMap<>();
     private Object tableModel;
     
        
     public StudentManagementPanel() {
         initComponents();
-        studentMap = new HashMap<>();
         setTitle("Student Management Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -163,8 +162,6 @@ public class StudentManagementPanel extends javax.swing.JFrame {
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name:");
-
-        name.setText("Student Name");
 
         addStudentBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         addStudentBtn.setText("Add Student");

@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package StudentManageApp;
 
-import javax.swing.JButton;
+import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -125,9 +122,17 @@ public class MainPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_StdManageActionPerformed
 
     private void CourseManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseManageActionPerformed
-        CourseEnrollmentPanel cep = new CourseEnrollmentPanel();
-        cep.setVisible(true);
-        this.dispose();
+
+        Map<String, String> studentmap = StudentManagementPanel.studentMap;
+        
+        if(!studentmap.isEmpty()) {
+            CourseEnrollmentPanel cep = new CourseEnrollmentPanel();
+            cep.setVisible(true);
+            this.dispose();
+        }else {
+            JOptionPane.showMessageDialog(this, "Please add stduent first");
+        }
+        
     }//GEN-LAST:event_CourseManageActionPerformed
 
     private void GradeManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GradeManageActionPerformed
