@@ -1,10 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package StudentManageApp;
 
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+
 
 /**
  *
@@ -12,15 +17,39 @@ import javax.swing.JFrame;
  */
 public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CourseEnrollmentPanel
-     */
+    private final DefaultListModel<String> studentListModel;
+    private final Map<String, ArrayList<String>> courseEnrollments; 
+    
     public CourseEnrollmentPanel() {
+        courseEnrollments = new HashMap<>();
+        studentListModel = new DefaultListModel<>();
         initComponents();
         setTitle("Course Enrollment Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850, 550);
         setLocationRelativeTo(null);
+        
+        
+        //add Default course
+        List<String> courseNames = getCourses();
+        courseDropdown.removeAllItems();
+        // Populate the course dropdown with course names
+        for (String courseName : courseNames) {
+            courseDropdown.addItem(courseName);
+        }
+        
+       Map<String, String> studentMap = StudentManagementPanel.studentMap;
+
+        studentList.removeAll();
+
+        // Iterate through the values (student names) of the studentMap and add them to the model
+        for (String studentName : studentMap.values()) {
+            studentListModel.addElement(studentName);
+        }
+
+        // Set the model to the studentList
+        studentList.setModel(studentListModel);
+        
+        
     }
 
     /**
@@ -34,10 +63,22 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
         CourseManagePage = new javax.swing.JPanel();
         Backbtn = new javax.swing.JButton();
+        CourseTitle = new javax.swing.JLabel();
+        courseDropdown = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        studentList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        enrollBtn = new javax.swing.JButton();
+        newCorseName = new javax.swing.JTextField();
+        NewCourseBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        enrolledList = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         CourseManagePage.setBackground(new java.awt.Color(51, 51, 51));
+        CourseManagePage.setForeground(new java.awt.Color(255, 255, 255));
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -46,21 +87,121 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
             }
         });
 
+        CourseTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        CourseTitle.setForeground(new java.awt.Color(255, 255, 255));
+        CourseTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CourseTitle.setText("Course Enrollment Panel");
+        CourseTitle.setAlignmentX(0.5F);
+
+        courseDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Choose Course:");
+
+        studentList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(studentList);
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Students:");
+
+        enrollBtn.setText("Enroll");
+        enrollBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollBtnActionPerformed(evt);
+            }
+        });
+
+        NewCourseBtn.setText("Add Course");
+        NewCourseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewCourseBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Add New Course:");
+
+        enrolledList.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        enrolledList.setText("View Enrolled List");
+        enrolledList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrolledListActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CourseManagePageLayout = new javax.swing.GroupLayout(CourseManagePage);
         CourseManagePage.setLayout(CourseManagePageLayout);
         CourseManagePageLayout.setHorizontalGroup(
             CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourseManagePageLayout.createSequentialGroup()
+                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(enrollBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(enrolledList))
+                            .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                        .addGap(103, 103, 103)
+                                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(NewCourseBtn)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                        .addGap(75, 75, 75)
+                                        .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(courseDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(118, 118, 118))
             .addGroup(CourseManagePageLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(Backbtn)
-                .addContainerGap(759, Short.MAX_VALUE))
+                .addGap(203, 203, 203)
+                .addComponent(CourseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CourseManagePageLayout.setVerticalGroup(
             CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CourseManagePageLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(Backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CourseTitle))
+                        .addGap(54, 54, 54)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(courseDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(41, 41, 41)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel3)
+                        .addGap(39, 39, 39)
+                        .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(NewCourseBtn)))
+                .addGap(52, 52, 52)
+                .addComponent(enrollBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(enrolledList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -76,40 +217,37 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Back to main panel
     private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
         MainPanel mp = new MainPanel();
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackbtnActionPerformed
 
+    private void enrollBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollBtnActionPerformed
+        enrollStudent();
+        System.out.println(courseEnrollments);
+    }//GEN-LAST:event_enrollBtnActionPerformed
+    //Add new corse
+    private void NewCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewCourseBtnActionPerformed
+        String newcorsename = newCorseName.getText();
+        courseDropdown.addItem(newcorsename);
+        newCorseName.setText("");
+        JOptionPane.showMessageDialog(this, "New Course added Successfully");
+    }//GEN-LAST:event_NewCourseBtnActionPerformed
+
+    private void enrolledListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrolledListActionPerformed
+        
+        this.dispose();
+    }//GEN-LAST:event_enrolledListActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CourseEnrollmentPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CourseEnrollmentPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CourseEnrollmentPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CourseEnrollmentPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new CourseEnrollmentPanel().setVisible(true);
@@ -119,5 +257,49 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Backbtn;
     private javax.swing.JPanel CourseManagePage;
+    private javax.swing.JLabel CourseTitle;
+    private javax.swing.JButton NewCourseBtn;
+    private javax.swing.JComboBox<String> courseDropdown;
+    private javax.swing.JButton enrollBtn;
+    private javax.swing.JButton enrolledList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField newCorseName;
+    private javax.swing.JList<String> studentList;
     // End of variables declaration//GEN-END:variables
+
+   private List<String> getCourses() {
+        // Assuming you have a list of course names stored somewhere
+        List<String> courseNames = new ArrayList<>();
+        courseNames.add("Mathematics 101");
+        courseNames.add("Physics 101");
+        courseNames.add("Biology 101");
+        courseNames.add("Bscs 101");
+        // Add more courses as needed
+        return courseNames;
+    }
+    
+   
+private void enrollStudent() {
+        String course = (String) courseDropdown.getSelectedItem();
+        String student = studentList.getSelectedValue();
+
+        if (student != null && course != null) {
+            String studentId = student.split(":")[0]; // Extract the student ID
+            ArrayList<String> enrolledCourses = courseEnrollments.getOrDefault(studentId, new ArrayList<>());
+            if (!enrolledCourses.contains(course)) {
+                enrolledCourses.add(course);
+            }
+            courseEnrollments.put(studentId, enrolledCourses);
+            JOptionPane.showMessageDialog(this, "Student enrolled successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select both a student and a course.");
+        }
+    }
+
+
+    
+    
 }

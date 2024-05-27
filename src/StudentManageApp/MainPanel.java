@@ -20,7 +20,7 @@ public class MainPanel extends javax.swing.JFrame {
         initComponents();
         setTitle("Student Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850, 550);
+//        setSize(850, 550);
         setLocationRelativeTo(null);
     }
 

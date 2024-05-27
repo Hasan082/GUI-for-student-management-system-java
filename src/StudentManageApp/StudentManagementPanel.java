@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class StudentManagementPanel extends javax.swing.JFrame {
    
-    private final HashMap<String, String> studentMap;
+    public static HashMap<String, String> studentMap;
     private Object tableModel;
     
        
@@ -19,7 +19,6 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         studentMap = new HashMap<>();
         setTitle("Student Management Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850, 550);
         setLocationRelativeTo(null);
         updatePanelWrapper.setVisible(false);
 
@@ -38,6 +37,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         AddStudentPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        backbtn = new javax.swing.JButton();
         addStudentMenu = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -89,31 +89,39 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Student Management panel");
 
+        backbtn.setText("Back");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AddStudentPanelLayout = new javax.swing.GroupLayout(AddStudentPanel);
         AddStudentPanel.setLayout(AddStudentPanelLayout);
         AddStudentPanelLayout.setHorizontalGroup(
             AddStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddStudentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(AddStudentPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(backbtn)
+                .addGap(214, 214, 214)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(282, 282, 282))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AddStudentPanelLayout.setVerticalGroup(
             AddStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
+            .addGroup(AddStudentPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         addStudentMenu.setBackground(new java.awt.Color(51, 51, 51));
         addStudentMenu.setForeground(new java.awt.Color(255, 255, 255));
         addStudentMenu.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        addStudentMenu.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                addStudentMenuComponentHidden(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -153,17 +161,10 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Id:");
 
-        id.setForeground(new java.awt.Color(255, 255, 255));
-
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name:");
 
         name.setText("Student Name");
-        name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
-            }
-        });
 
         addStudentBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         addStudentBtn.setText("Add Student");
@@ -317,14 +318,6 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addStudentMenuComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_addStudentMenuComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addStudentMenuComponentHidden
-
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameActionPerformed
-
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
         addStudent();
     }//GEN-LAST:event_addStudentBtnActionPerformed
@@ -336,6 +329,12 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     private void UpdateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoActionPerformed
         UpdateInfotoHashMap();
     }//GEN-LAST:event_UpdateInfoActionPerformed
+
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+        MainPanel mp = new MainPanel();
+        mp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backbtnActionPerformed
 
     
     
@@ -382,6 +381,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     private javax.swing.JButton UpdateInfo;
     private javax.swing.JButton addStudentBtn;
     private javax.swing.JTabbedPane addStudentMenu;
+    private javax.swing.JButton backbtn;
     private javax.swing.JTextField findId;
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
