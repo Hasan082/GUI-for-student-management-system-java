@@ -20,9 +20,10 @@ public class GradeDisplay extends javax.swing.JFrame {
      */
     public GradeDisplay() {
         initComponents();
-        setTitle("Course Enrolled List");
+        setTitle("Grade Display List");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        //Call the populated table method
         populateGradeTable();
     }
 
@@ -163,23 +164,23 @@ public class GradeDisplay extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    
+    //Method for populate Table
     private void populateGradeTable() {
-    DefaultTableModel model = (DefaultTableModel) gradeTable.getModel();
-    model.setRowCount(0); // Clear existing rows
+        DefaultTableModel model = (DefaultTableModel) gradeTable.getModel();
+        model.setRowCount(0); // Clear existing rows
 
-    Map<String, Double> averageGrades = calculateAverageGrades();
+        Map<String, Double> averageGrades = calculateAverageGrades();
 
-    for (Map.Entry<String, Double> entry : averageGrades.entrySet()) {
-        String studentId = entry.getKey();
-        double averageGrade = entry.getValue();
-        String studentName = StudentManagementPanel.studentMap.get(studentId);
-        String averageGradeLetter = convertPointToGrade(averageGrade); 
-        System.out.print(studentId + " " + studentName + "" + averageGrade + "" + averageGradeLetter);
-        model.addRow(new Object[]{studentId, studentName, averageGrade, averageGradeLetter});
+        for (Map.Entry<String, Double> entry : averageGrades.entrySet()) {
+            String studentId = entry.getKey();
+            double averageGrade = entry.getValue();
+            String studentName = StudentManagementPanel.studentMap.get(studentId);
+            String averageGradeLetter = convertPointToGrade(averageGrade); 
+            model.addRow(new Object[]{studentId, studentName, averageGrade, averageGradeLetter});
+        }
     }
-}
-
+    
+    //Convert Numeric grade letter Grade
     private String convertPointToGrade(double point) {
         if (point >= 4.0) return "A+";
         if (point >= 3.7) return "A";
@@ -195,33 +196,33 @@ public class GradeDisplay extends javax.swing.JFrame {
         return "F";
     }
 
-
+    // Method for calculating grade
     private Map<String, Double> calculateAverageGrades() {
-    Map<String, Double> averageGrades = new HashMap<>();
-    
-    for (Map.Entry<String, Map<String, String>> entry : studentGrades.entrySet()) {
-        String studentId = entry.getKey();
-        Map<String, String> grades = entry.getValue();
-        
-        double total = 0;
-        int count = 0;
-        
-        for (String gradeStr : grades.values()) {
-            double grade = Double.parseDouble(gradeStr);
-            total += grade;
-            count++;
+        Map<String, Double> averageGrades = new HashMap<>();
+
+        for (Map.Entry<String, Map<String, String>> entry : studentGrades.entrySet()) {
+            String studentId = entry.getKey();
+            Map<String, String> grades = entry.getValue();
+
+            double total = 0;
+            int count = 0;
+
+            for (String gradeStr : grades.values()) {
+                double grade = Double.parseDouble(gradeStr);
+                total += grade;
+                count++;
+            }
+
+            if (count > 0) {
+                double average = total / count;
+                DecimalFormat df = new DecimalFormat("#.##");
+                average = Double.parseDouble(df.format(average));
+                averageGrades.put(studentId, average);
+            }
         }
-        
-        if (count > 0) {
-            double average = total / count;
-            DecimalFormat df = new DecimalFormat("#.##");
-            average = Double.parseDouble(df.format(average));
-            averageGrades.put(studentId, average);
-        }
+
+        return averageGrades;
     }
-    
-    return averageGrades;
-}
 
 
 

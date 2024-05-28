@@ -300,19 +300,19 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    //add student button
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
         addStudent();
     }//GEN-LAST:event_addStudentBtnActionPerformed
-
+    //Update student button
     private void updateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStudentActionPerformed
        updateStudent();
     }//GEN-LAST:event_updateStudentActionPerformed
-
+    //Update all info
     private void UpdateInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoActionPerformed
         UpdateInfotoHashMap();
     }//GEN-LAST:event_UpdateInfoActionPerformed
-
+    //back to Main Panel
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         MainPanel mp = new MainPanel();
         mp.setVisible(true);
@@ -383,48 +383,46 @@ public class StudentManagementPanel extends javax.swing.JFrame {
     private javax.swing.JButton updateStudent;
     // End of variables declaration//GEN-END:variables
     
-
+    //Method for Add Student
     private void addStudent() {
         
-    String stID = id.getText();
-    String stName = name.getText();
-    
-    if (!stID.isEmpty() && !stName.isEmpty()) {
-        // Check if the ID already exists
-        if (studentMap.containsKey(stID)) {
-            JOptionPane.showMessageDialog(this, "Student with ID " + stID + " already exists!");
-        } else {
-            studentMap.put(stID, stName);
-            id.setText(""); 
-            name.setText("");
-            updateStudentTable();
-            JOptionPane.showMessageDialog(this, "Student added successfully!");
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Please enter both ID and Name.");
-    }
-}
+        String stID = id.getText();
+        String stName = name.getText();
 
-private void updateStudent() {
-    String idToUpdate = findId.getText();
-    if (idToUpdate != null && !idToUpdate.isEmpty()) {
-        if (studentMap.containsKey(idToUpdate)) {
-            String currentName = studentMap.get(idToUpdate);
-            ShowName.setText(currentName);
-            findId.setEnabled(false);
-            updatePanelWrapper.setVisible(true);
+        if (!stID.isEmpty() && !stName.isEmpty()) {
+            // Check if the ID already exists
+            if (studentMap.containsKey(stID)) {
+                JOptionPane.showMessageDialog(this, "Student with ID " + stID + " already exists!");
+            } else {
+                studentMap.put(stID, stName);
+                id.setText(""); 
+                name.setText("");
+                updateStudentTable();
+                JOptionPane.showMessageDialog(this, "Student added successfully!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Student with ID " + idToUpdate + " not found!");
+            JOptionPane.showMessageDialog(this, "Please enter both ID and Name.");
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Invalid student ID. Please enter a valid ID.");
     }
-}
+    
+    //Method for Update Student    
+    private void updateStudent() {
+        String idToUpdate = findId.getText();
+        if (idToUpdate != null && !idToUpdate.isEmpty()) {
+            if (studentMap.containsKey(idToUpdate)) {
+                String currentName = studentMap.get(idToUpdate);
+                ShowName.setText(currentName);
+                findId.setEnabled(false);
+                updatePanelWrapper.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Student with ID " + idToUpdate + " not found!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid student ID. Please enter a valid ID.");
+        }
+    }
 
-    
-    
-    
-    
+    //Method for Update Table
     private void updateStudentTable() {
         DefaultTableModel model = (DefaultTableModel) StudentTable.getModel();
         model.setRowCount(0);
@@ -433,6 +431,7 @@ private void updateStudent() {
         }
     }
 
+    //Method for Update data store
     private void UpdateInfotoHashMap() {
         String updatedId = findId.getText();
         String updateName = ShowName.getText();

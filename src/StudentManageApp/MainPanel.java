@@ -73,17 +73,17 @@ public class MainPanel extends javax.swing.JFrame {
             leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
-                .addContainerGap(258, Short.MAX_VALUE)
+                .addContainerGap(245, Short.MAX_VALUE)
                 .addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
                         .addComponent(HomeTitle)
-                        .addGap(192, 192, 192))
+                        .addGap(241, 241, 241))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
                         .addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CourseManage, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(StdManage, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(GradeManage, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(274, 274, 274))))
+                        .addGap(323, 323, 323))))
         );
         leftMenuLayout.setVerticalGroup(
             leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,13 +92,13 @@ public class MainPanel extends javax.swing.JFrame {
                 .addComponent(HomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(18, 18, 18)
                 .addComponent(StdManage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(83, 83, 83)
                 .addComponent(CourseManage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
                 .addComponent(GradeManage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,18 +109,20 @@ public class MainPanel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(leftMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(leftMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Student Management Panel Open
     private void StdManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdManageActionPerformed
         StudentManagementPanel smp = new StudentManagementPanel();
         smp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_StdManageActionPerformed
 
+    //Course Management Panel Open
     private void CourseManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourseManageActionPerformed
 
         Map<String, String> studentmap = StudentManagementPanel.studentMap;
@@ -134,7 +136,8 @@ public class MainPanel extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_CourseManageActionPerformed
-
+    
+    //Grage manage panel open
     private void GradeManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GradeManageActionPerformed
         if(!isStudentCourseEmpty()) {
             GradeManagementPanel gmp = new GradeManagementPanel();
@@ -145,16 +148,17 @@ public class MainPanel extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_GradeManageActionPerformed
- 
-   private boolean isStudentCourseEmpty() {
-    // Check if there are no students or courses added
-    boolean isStudentEmpty = StudentManagementPanel.studentMap.isEmpty();
-    boolean isCourseEmpty = CourseEnrollmentPanel.courseEnrollments.isEmpty();
     
-    // Return true if either students or courses are empty
-    return isStudentEmpty || isCourseEmpty;
-}
-    /**
+   //Check student list empty or not to avaoid null pointer exception
+   private boolean isStudentCourseEmpty() {
+        // Check if there are no students or courses added
+        boolean isStudentEmpty = StudentManagementPanel.studentMap.isEmpty();
+        boolean isCourseEmpty = CourseEnrollmentPanel.courseEnrollments.isEmpty();
+
+        // Return true if either students or courses are empty
+        return isStudentEmpty || isCourseEmpty;
+    }
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {

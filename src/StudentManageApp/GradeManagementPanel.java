@@ -242,7 +242,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
-
+    //Populate Student Dropdown
     private void populateStudentDropdown() {
 
         // Clear the student dropdown
@@ -253,11 +253,11 @@ public class GradeManagementPanel extends javax.swing.JFrame {
 
         // Populate the student dropdown with the retrieved student names
         for (String stdentInfo : stduenStrings) {
-            System.err.println("stdentInfo: " + stdentInfo);
             gradeStudentlist.addItem(stdentInfo);
         }
     }
-
+    
+    //Retrives Student Id and name and Send to method
     private List<String> getStudentNames() {
         List<String> studentListforGrade = new ArrayList<>();
         for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
@@ -271,7 +271,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         return studentListforGrade;
     }
     
-    
+    //Method for populate Student dropdown
     private void populateCourseDropdownForStudent(String studentId) {
         // Clear the course dropdown
         gradeCourseSelected.removeAllItems();
@@ -287,24 +287,23 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         }
     }
     
-    
+    //method for assign Grade
     private void assignGrade() {
-    String student = (String) gradeStudentlist.getSelectedItem();
-    String studentId = student.split(":")[0]; // Extract student ID
-    String subject = (String) gradeCourseSelected.getSelectedItem();
-    String grade = gradeField.getText(); // Assume there's a text field for the grade
+        String student = (String) gradeStudentlist.getSelectedItem();
+        String studentId = student.split(":")[0]; // Extract student ID
+        String subject = (String) gradeCourseSelected.getSelectedItem();
+        String grade = gradeField.getText(); // Assume there's a text field for the grade
 
-    if (studentId != null && subject != null && !grade.isEmpty()) {
-        studentGrades.putIfAbsent(studentId, new HashMap<>());
-        Map<String, String> subjectGrades = studentGrades.get(studentId);
-        subjectGrades.put(subject, grade);
-        studentGrades.put(studentId, subjectGrades);
-        System.out.println(studentGrades);
-        JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a grade.");
+        if (studentId != null && subject != null && !grade.isEmpty()) {
+            studentGrades.putIfAbsent(studentId, new HashMap<>());
+            Map<String, String> subjectGrades = studentGrades.get(studentId);
+            subjectGrades.put(subject, grade);
+            studentGrades.put(studentId, subjectGrades);
+            JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a grade.");
+        }
     }
-}
 
     
     
