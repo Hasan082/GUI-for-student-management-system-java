@@ -54,7 +54,16 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
             new String [] {
                 "Student Id", "Student Name", "Course List"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        enrolledlistTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(enrolledlistTable);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N

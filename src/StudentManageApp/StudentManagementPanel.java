@@ -82,6 +82,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         AddStudentPanel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Student Management panel");
 
         backbtn.setText("Back");
@@ -98,8 +99,8 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             .addGroup(AddStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backbtn)
-                .addGap(229, 229, 229)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(207, 207, 207)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         AddStudentPanelLayout.setVerticalGroup(
@@ -124,7 +125,16 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             new String [] {
                 "Student Id", "Student Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        StudentTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(StudentTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

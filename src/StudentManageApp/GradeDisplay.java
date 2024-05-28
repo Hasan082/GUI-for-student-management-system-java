@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +26,26 @@ public class GradeDisplay extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         //Call the populated table method
         populateGradeTable();
+        
+        //Open A popup with Individual info
+        gradeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int row = gradeTable.getSelectedRow();
+                    if (row != -1) {
+                        String studentId = (String) gradeTable.getValueAt(row, 0);
+                        displayStudentGradesPopup(studentId);
+                    }
+                }
+            }
+
+        });
+        
+        
+        
+        
+        
     }
 
     /**
@@ -67,7 +88,16 @@ public class GradeDisplay extends javax.swing.JFrame {
             new String [] {
                 "Student Id", "Student Name", "CGPA", "Result"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        gradeTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(gradeTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -224,6 +254,35 @@ public class GradeDisplay extends javax.swing.JFrame {
         return averageGrades;
     }
 
+//    gradeTable
+
+    private void displayStudentGradesPopup(String studentId) {
+        Map<String, String> grades = studentGrades.get(studentId);
+        if (grades == null) {
+            JOptionPane.showMessageDialog(this, "No grades found for the selected student.");
+            return;
+        }
+
+        String studentName = StudentManagementPanel.studentMap.get(studentId);
+        StringBuilder message = new StringBuilder();
+        message.append("Grades for ").append(studentName).append(" (ID: ").append(studentId).append("):\n");
+
+        double totalPoints = 0.0;
+        for (Map.Entry<String, String> entry : grades.entrySet()) {
+            message.append("Course: ").append(entry.getKey()).append(", Grade: ").append(entry.getValue()).append("\n");
+            totalPoints += Double.parseDouble(entry.getValue());
+        }
+
+        double average = totalPoints / grades.size();
+        DecimalFormat df = new DecimalFormat("#.##");
+        average = Double.parseDouble(df.format(average));
+        String averageGrade = convertPointToGrade(average);
+        
+        message.append("\nTotal Points: ").append(totalPoints);
+        message.append("\nAverage Grade: ").append(average).append(" (").append(averageGrade).append(")");
+
+        JOptionPane.showMessageDialog(this, message.toString());
+    }
 
 
 
