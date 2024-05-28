@@ -114,7 +114,7 @@ The Student Management System is a Java-based GUI application designed to manage
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License. See the `LICENSE`(https://opensource.org/license/mit) file for details.
 
 ## Acknowledgements
 
