@@ -38,6 +38,7 @@ public class MainPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
+        setResizable(false);
 
         StdManage.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         StdManage.setText("Student Management Panel");

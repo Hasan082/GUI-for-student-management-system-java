@@ -61,6 +61,7 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         CourseManagePage.setForeground(new java.awt.Color(255, 255, 255));
 

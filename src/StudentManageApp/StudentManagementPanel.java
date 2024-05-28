@@ -77,6 +77,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
 
         AddStudentPanel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
@@ -95,9 +96,9 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         AddStudentPanelLayout.setHorizontalGroup(
             AddStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddStudentPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(backbtn)
-                .addGap(214, 214, 214)
+                .addGap(229, 229, 229)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -105,19 +106,16 @@ public class StudentManagementPanel extends javax.swing.JFrame {
             AddStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AddStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8))
-            .addGroup(AddStudentPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         addStudentMenu.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        StudentTable.setForeground(new java.awt.Color(255, 255, 255));
         StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
