@@ -17,7 +17,6 @@ public class MainPanel extends javax.swing.JFrame {
         initComponents();
         setTitle("Student Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setSize(850, 550);
         setLocationRelativeTo(null);
     }
 
@@ -73,7 +72,7 @@ public class MainPanel extends javax.swing.JFrame {
             leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
-                .addContainerGap(201, Short.MAX_VALUE)
+                .addContainerGap(258, Short.MAX_VALUE)
                 .addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
                         .addComponent(HomeTitle)
@@ -113,7 +112,6 @@ public class MainPanel extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void StdManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdManageActionPerformed

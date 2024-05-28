@@ -3,15 +3,12 @@ package StudentManageApp;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
 public class StudentManagementPanel extends javax.swing.JFrame {
    
     public static HashMap<String, String> studentMap = new HashMap<>();
-    private Object tableModel;
     
        
     public StudentManagementPanel() {
@@ -81,11 +78,9 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
-        AddStudentPanel.setBackground(new java.awt.Color(51, 51, 51));
         AddStudentPanel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Student Management panel");
 
         backbtn.setText("Back");
@@ -118,13 +113,10 @@ public class StudentManagementPanel extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        addStudentMenu.setBackground(new java.awt.Color(51, 51, 51));
-        addStudentMenu.setForeground(new java.awt.Color(255, 255, 255));
         addStudentMenu.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        StudentTable.setBackground(new java.awt.Color(0, 0, 0));
         StudentTable.setForeground(new java.awt.Color(255, 255, 255));
         StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -298,7 +290,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
                     .addComponent(AddStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addStudentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -313,6 +305,7 @@ public class StudentManagementPanel extends javax.swing.JFrame {
         AddStudentPanel.getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
