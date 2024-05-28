@@ -1,7 +1,12 @@
 package StudentManageApp;
 
 
+import static StudentManageApp.GradeManagementPanel.studentGrades;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +23,7 @@ public class GradeDisplay extends javax.swing.JFrame {
         setTitle("Course Enrolled List");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        populateGradeTable();
     }
 
     /**
@@ -34,7 +40,7 @@ public class GradeDisplay extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gradeTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,19 +55,19 @@ public class GradeDisplay extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBackground(new java.awt.Color(242, 242, 242));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gradeTable.setBackground(new java.awt.Color(242, 242, 242));
+        gradeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Student Id", "Student Name", "Grade"
+                "Student Id", "Student Name", "CGPA", "Result"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(gradeTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,11 +155,75 @@ public class GradeDisplay extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable gradeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void populateGradeTable() {
+    DefaultTableModel model = (DefaultTableModel) gradeTable.getModel();
+    model.setRowCount(0); // Clear existing rows
+
+    Map<String, Double> averageGrades = calculateAverageGrades();
+
+    for (Map.Entry<String, Double> entry : averageGrades.entrySet()) {
+        String studentId = entry.getKey();
+        double averageGrade = entry.getValue();
+        String studentName = StudentManagementPanel.studentMap.get(studentId);
+        String averageGradeLetter = convertPointToGrade(averageGrade); 
+        System.out.print(studentId + " " + studentName + "" + averageGrade + "" + averageGradeLetter);
+        model.addRow(new Object[]{studentId, studentName, averageGrade, averageGradeLetter});
+    }
+}
+
+    private String convertPointToGrade(double point) {
+        if (point >= 4.0) return "A+";
+        if (point >= 3.7) return "A";
+        if (point >= 3.3) return "A-";
+        if (point >= 3.0) return "B+";
+        if (point >= 2.7) return "B";
+        if (point >= 2.3) return "B-";
+        if (point >= 2.0) return "C+";
+        if (point >= 1.7) return "C";
+        if (point >= 1.3) return "C-";
+        if (point >= 1.0) return "D+";
+        if (point >= 0.7) return "D";
+        return "F";
+    }
+
+
+    private Map<String, Double> calculateAverageGrades() {
+    Map<String, Double> averageGrades = new HashMap<>();
+    
+    for (Map.Entry<String, Map<String, String>> entry : studentGrades.entrySet()) {
+        String studentId = entry.getKey();
+        Map<String, String> grades = entry.getValue();
+        
+        double total = 0;
+        int count = 0;
+        
+        for (String gradeStr : grades.values()) {
+            double grade = Double.parseDouble(gradeStr);
+            total += grade;
+            count++;
+        }
+        
+        if (count > 0) {
+            double average = total / count;
+            DecimalFormat df = new DecimalFormat("#.##");
+            average = Double.parseDouble(df.format(average));
+            averageGrades.put(studentId, average);
+        }
+    }
+    
+    return averageGrades;
+}
+
+
+
+
 }
