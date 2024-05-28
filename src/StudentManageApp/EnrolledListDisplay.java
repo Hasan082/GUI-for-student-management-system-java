@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EnrolledListDisplay extends javax.swing.JFrame {
         
-   
+   public static Map<String, ArrayList<String>> courseList = CourseEnrollmentPanel.courseEnrollments;
 
 
     /**
@@ -42,6 +42,7 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         enrolledlistTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,13 +75,14 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jButton1)
                 .addGap(217, 217, 217)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(362, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +91,9 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -159,6 +163,7 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
     private void showTableData() {
@@ -167,14 +172,12 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
 
         // Get the course enrollments data
         
-        Map<String, ArrayList<String>> courseList = CourseEnrollmentPanel.courseEnrollments;
+        
         // Iterate through the course enrollments data and add rows to the table model
         for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
             String studentId = entry.getKey();
-            System.err.println("studentId " + studentId);
             ArrayList<String> courses = entry.getValue();
             String studentName = StudentManagementPanel.studentMap.get(studentId);
-            System.err.println("studentName: " + studentName);
             String coursesStr = String.join(", ", courses);
             
             // Add row to table model

@@ -35,6 +35,7 @@ public class MainPanel extends javax.swing.JFrame {
         CourseManage = new javax.swing.JButton();
         GradeManage = new javax.swing.JButton();
         HomeTitle = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
@@ -73,8 +74,9 @@ public class MainPanel extends javax.swing.JFrame {
         leftMenu.setLayout(leftMenuLayout);
         leftMenuLayout.setHorizontalGroup(
             leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftMenuLayout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
                         .addGroup(leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,14 +86,16 @@ public class MainPanel extends javax.swing.JFrame {
                         .addGap(236, 236, 236))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
                         .addComponent(HomeTitle)
-                        .addGap(183, 183, 183))))
+                        .addGap(192, 192, 192))))
         );
         leftMenuLayout.setVerticalGroup(
             leftMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftMenuLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
                 .addComponent(HomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
                 .addComponent(StdManage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addComponent(CourseManage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,12 +140,24 @@ public class MainPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_CourseManageActionPerformed
 
     private void GradeManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GradeManageActionPerformed
-        GradeManagementPanel gmp = new GradeManagementPanel();
-        gmp.setVisible(true);
-        this.dispose();
+        if(!isStudentCourseEmpty()) {
+            GradeManagementPanel gmp = new GradeManagementPanel();
+            gmp.setVisible(true);
+            this.dispose();
+        }else {
+            JOptionPane.showMessageDialog(this, "Please add student and course First");
+        }
+        
     }//GEN-LAST:event_GradeManageActionPerformed
  
-   
+   private boolean isStudentCourseEmpty() {
+    // Check if there are no students or courses added
+    boolean isStudentEmpty = StudentManagementPanel.studentMap.isEmpty();
+    boolean isCourseEmpty = CourseEnrollmentPanel.courseEnrollments.isEmpty();
+    
+    // Return true if either students or courses are empty
+    return isStudentEmpty || isCourseEmpty;
+}
     /**
      * @param args the command line arguments
      */
@@ -181,6 +197,7 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JButton GradeManage;
     private javax.swing.JLabel HomeTitle;
     private javax.swing.JButton StdManage;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel leftMenu;
     // End of variables declaration//GEN-END:variables
 }

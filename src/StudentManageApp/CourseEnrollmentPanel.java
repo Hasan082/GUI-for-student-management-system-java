@@ -58,6 +58,7 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
         NewCourseBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         enrolledList = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,68 +123,71 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
         CourseManagePageLayout.setHorizontalGroup(
             CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourseManagePageLayout.createSequentialGroup()
-                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(CourseManagePageLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(enrollBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CourseManagePageLayout.createSequentialGroup()
-                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(CourseManagePageLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(enrolledList))
-                            .addGroup(CourseManagePageLayout.createSequentialGroup()
-                                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(CourseManagePageLayout.createSequentialGroup()
-                                        .addGap(103, 103, 103)
-                                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(NewCourseBtn)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(CourseManagePageLayout.createSequentialGroup()
-                                        .addGap(75, 75, 75)
-                                        .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
-                                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(courseDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(118, 118, 118))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(enrolledList)
+                .addGap(351, 351, 351))
             .addGroup(CourseManagePageLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(Backbtn)
                 .addGap(203, 203, 203)
                 .addComponent(CourseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CourseManagePageLayout.createSequentialGroup()
+                .addComponent(jSeparator1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CourseManagePageLayout.createSequentialGroup()
+                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(enrollBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NewCourseBtn)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(CourseManagePageLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(courseDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(87, 87, 87))
         );
         CourseManagePageLayout.setVerticalGroup(
             CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CourseManagePageLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CourseTitle))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CourseManagePageLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CourseTitle))
-                        .addGap(54, 54, 54)
+                        .addComponent(jLabel3)
+                        .addGap(39, 39, 39)
+                        .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(NewCourseBtn))
+                    .addGroup(CourseManagePageLayout.createSequentialGroup()
                         .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(courseDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(41, 41, 41)
                         .addGroup(CourseManagePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(CourseManagePageLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel3)
-                        .addGap(39, 39, 39)
-                        .addComponent(newCorseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(NewCourseBtn)))
-                .addGap(52, 52, 52)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30)
                 .addComponent(enrollBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addComponent(enrolledList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
@@ -192,11 +196,17 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CourseManagePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CourseManagePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CourseManagePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CourseManagePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -251,6 +261,7 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField newCorseName;
     private javax.swing.JList<String> studentList;
     // End of variables declaration//GEN-END:variables
@@ -264,13 +275,13 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
         if (student != null && course != null) {
             String studentId = student.split(":")[0]; // Extract the student ID
-            System.err.println("studentId: course page " + studentId);
             ArrayList<String> enrolledCourses = courseEnrollments.getOrDefault(studentId, new ArrayList<>());
             if (!enrolledCourses.contains(course)) {
                 enrolledCourses.add(course);
             }
             courseEnrollments.put(studentId, enrolledCourses);
             JOptionPane.showMessageDialog(this, "Student enrolled successfully!");
+            studentList.clearSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select both a student and a course.");
         }
@@ -290,13 +301,11 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
     
     //Pre populate some courses
     private List<String> getCourses() {
-        // Assuming you have a list of course names stored somewhere
         List<String> courseNames = new ArrayList<>();
         courseNames.add("Mathematics 101");
         courseNames.add("Physics 101");
         courseNames.add("Biology 101");
         courseNames.add("Bscs 101");
-        // Add more courses as needed
         return courseNames;
     }
     
