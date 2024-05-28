@@ -80,28 +80,28 @@ The Student Management System is a Java-based GUI application designed to manage
 ### Sample Method: Assign Grade
 
 ```java
-private void assignGrade() {
-    String student = (String) gradeStudentlist.getSelectedItem();
-    String studentId = student.split(":")[0]; // Extract student ID
-    String subject = (String) gradeCourseSelected.getSelectedItem();
-    String gradeStr = gradeField.getText(); // Assume there's a text field for the grade
+   private void assignGrade() {
+        String student = (String) gradeStudentlist.getSelectedItem();
+        String studentId = student.split(":")[0];//Retrive student ID
+        String subject = (String) gradeCourseSelected.getSelectedItem();
+        String grade = gradeField.getText();
 
-    try {
-        double grade = Double.parseDouble(gradeStr);
-
-        if (studentId != null && subject != null && grade <= 4.0) {
-            studentGrades.putIfAbsent(studentId, new HashMap<>());
-            Map<String, Double> subjectGrades = studentGrades.get(studentId);
-            subjectGrades.put(subject, grade);
-            studentGrades.put(studentId, subjectGrades);
-            JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+        if (studentId != null && subject != null && !grade.isEmpty()) {            
+            if(Double.parseDouble(grade)>= 0 && Double.parseDouble(grade) <= 4.0) {
+                studentGrades.putIfAbsent(studentId, new HashMap<>());
+                Map<String, String> subjectGrades = studentGrades.get(studentId);
+                subjectGrades.put(subject, grade);
+                studentGrades.put(studentId, subjectGrades);
+                JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+                gradeField.setText("");
+            }else {
+                JOptionPane.showMessageDialog(this, "Grade must be >= 0 or <=4.0");
+            }
+            
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a valid grade (<= 4).");
+            JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a grade.");
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Please enter a valid numerical grade.");
     }
-}
 ```
 
 ## Contributing
