@@ -48,6 +48,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         grade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         AssignGradeButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +69,11 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         jLabel2.setText("Select Student: ");
 
         gradeStudentlist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gradeStudentlist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gradeStudentlistActionPerformed(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Course: ");
@@ -82,6 +88,14 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         AssignGradeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AssignGradeButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jButton1.setText("View Grade List");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -118,6 +132,10 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                             .addComponent(gradeCourse, 0, 245, Short.MAX_VALUE)
                             .addComponent(grade))))
                 .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(352, 352, 352)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +158,9 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(52, 52, 52)
                 .addComponent(AssignGradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,8 +184,23 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_BackbuttonActionPerformed
 
     private void AssignGradeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignGradeButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_AssignGradeButtonActionPerformed
+
+    private void gradeStudentlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeStudentlistActionPerformed
+        String selectedStudentInfo = (String) gradeStudentlist.getSelectedItem();
+        if (selectedStudentInfo != null) {
+            String studentId = selectedStudentInfo.split(":")[0];
+            // Populate the course dropdown for the selected student
+            populateCourseDropdownForStudent(studentId);
+        }
+    }//GEN-LAST:event_gradeStudentlistActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        GradeDisplay gd = new GradeDisplay();
+        gd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +241,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     private javax.swing.JTextField grade;
     private javax.swing.JComboBox<String> gradeCourse;
     private javax.swing.JComboBox<String> gradeStudentlist;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -230,17 +266,34 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     }
 
     private List<String> getStudentNames() {
-    List<String> studentListforGrade = new ArrayList<>();
-    for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
-        String studentId = entry.getKey();
-        String studentName = StudentManagementPanel.studentMap.get(studentId);
-        // Check if the student name and enrolled courses are not null
-        if (studentName != null && !entry.getValue().isEmpty()) {
-            studentListforGrade.add(studentId + ":" + studentName);
+        List<String> studentListforGrade = new ArrayList<>();
+        for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
+            String studentId = entry.getKey();
+            String studentName = StudentManagementPanel.studentMap.get(studentId);
+            // Check if the student name and enrolled courses are not null
+            if (studentName != null && !entry.getValue().isEmpty()) {
+                studentListforGrade.add(studentId + ":" + studentName);
+            }
+        }
+        return studentListforGrade;
+    }
+    
+    
+    private void populateCourseDropdownForStudent(String studentId) {
+        // Clear the course dropdown
+        gradeCourse.removeAllItems();
+
+        // Get the courses for the selected student
+        ArrayList<String> courses = CourseEnrollmentPanel.courseEnrollments.get(studentId);
+
+        // Populate the course dropdown with the retrieved courses
+        if (courses != null) {
+            for (String course : courses) {
+                gradeCourse.addItem(course);
+            }
         }
     }
-    return studentListforGrade;
-}
-
+    
+    
 
 }
