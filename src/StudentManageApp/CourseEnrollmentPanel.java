@@ -18,43 +18,20 @@ import javax.swing.JFrame;
 public class CourseEnrollmentPanel extends javax.swing.JFrame {
 
     private final DefaultListModel<String> studentListModel;
-    public static Map<String, ArrayList<String>> courseEnrollments; 
+    public static Map<String, ArrayList<String>> courseEnrollments = new HashMap<>();
     
     public CourseEnrollmentPanel() {
-        courseEnrollments = new HashMap<>();
         studentListModel = new DefaultListModel<>();
         initComponents();
         setTitle("Course Enrollment Panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        
-        //add Default course
-        List<String> courseNames = getCourses();
-        courseDropdown.removeAllItems();
-        // Populate the course dropdown with course names
-        for (String courseName : courseNames) {
-            courseDropdown.addItem(courseName);
-        }
-        
-        Map<String, String> studentMap = StudentManagementPanel.studentMap;
+        //Populate Course dropdown list method
+        populateCourseDropdown();
 
-        studentList.removeAll();
-
-        // Iterate through the values (student names) of the studentMap and add them to the model
-        if(!studentMap.isEmpty()) {
-            
-            for (String studentName : studentMap.values()) {
-                studentListModel.addElement(studentName);
-                // Set the model to the studentList
-                studentList.setModel(studentListModel);
-            }
-        }else {
-            
-        }
-        
-
-        
+        //Populist student list method
+        populateStudentList();
         
         
     }
@@ -278,24 +255,16 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
     private javax.swing.JList<String> studentList;
     // End of variables declaration//GEN-END:variables
 
-   private List<String> getCourses() {
-        // Assuming you have a list of course names stored somewhere
-        List<String> courseNames = new ArrayList<>();
-        courseNames.add("Mathematics 101");
-        courseNames.add("Physics 101");
-        courseNames.add("Biology 101");
-        courseNames.add("Bscs 101");
-        // Add more courses as needed
-        return courseNames;
-    }
     
-   
-private void enrollStudent() {
+    
+   //Method for enrolled student with course
+    private void enrollStudent() {
         String course = (String) courseDropdown.getSelectedItem();
         String student = studentList.getSelectedValue();
 
         if (student != null && course != null) {
             String studentId = student.split(":")[0]; // Extract the student ID
+            System.err.println("studentId: course page " + studentId);
             ArrayList<String> enrolledCourses = courseEnrollments.getOrDefault(studentId, new ArrayList<>());
             if (!enrolledCourses.contains(course)) {
                 enrolledCourses.add(course);
@@ -307,7 +276,40 @@ private void enrollStudent() {
         }
     }
 
+    //Method for get student list
+    private void populateStudentList() {
+//        DefaultListModel<String> studentListModel = new DefaultListModel<>();
+        for (Map.Entry<String, String> entry : StudentManagementPanel.studentMap.entrySet()) {
+            String studentId = entry.getKey();
+            String studentName = entry.getValue();
+            studentListModel.addElement(studentId + ": " + studentName);
+        }
+        studentList.setModel(studentListModel);
+    }
 
+    
+    //Pre populate some courses
+    private List<String> getCourses() {
+        // Assuming you have a list of course names stored somewhere
+        List<String> courseNames = new ArrayList<>();
+        courseNames.add("Mathematics 101");
+        courseNames.add("Physics 101");
+        courseNames.add("Biology 101");
+        courseNames.add("Bscs 101");
+        // Add more courses as needed
+        return courseNames;
+    }
+    
+    //Method for course setup
+    private void populateCourseDropdown(){
+        List<String> courseNames = getCourses();
+        courseDropdown.removeAllItems();
+        // Populate the course dropdown with course names
+        for (String courseName : courseNames) {
+            courseDropdown.addItem(courseName);
+        }
+    }
+    
     
     
 }

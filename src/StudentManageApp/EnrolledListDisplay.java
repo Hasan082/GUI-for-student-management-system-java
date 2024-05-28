@@ -1,8 +1,11 @@
 package StudentManageApp;
 
+import static StudentManageApp.CourseEnrollmentPanel.courseEnrollments;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -10,8 +13,9 @@ import javax.swing.table.DefaultTableModel;
  * @author hasan
  */
 public class EnrolledListDisplay extends javax.swing.JFrame {
-    
-    private DefaultTableModel tableModel;
+        
+   
+
 
     /**
      * Creates new form EnrolledListDisplay
@@ -21,7 +25,6 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
         setTitle("Course Enrolled List");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        tableModel = new DefaultTableModel(new Object[]{"Student ID", "Name", "Enrolled Courses"}, 0);
         showTableData();
     }
 
@@ -143,7 +146,7 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EnrolledListDisplay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new EnrolledListDisplay().setVisible(true);
@@ -158,26 +161,28 @@ public class EnrolledListDisplay extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-   private void showTableData() {
-    // Clear the existing data in the table model
-    tableModel.setRowCount(0);
+    private void showTableData() {
+        DefaultTableModel model = (DefaultTableModel) enrolledlistTable.getModel();
+        model.setRowCount(0);
 
-    // Get the course enrollments data
-    Map<String, ArrayList<String>> courseList = CourseEnrollmentPanel.courseEnrollments;
-
-    // Iterate through the course enrollments data and add rows to the table model
-    for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
-        String studentId = entry.getKey();
-        ArrayList<String> courses = entry.getValue();
-        String studentName = StudentManagementPanel.studentMap.get(studentId);
-        String coursesStr = String.join(", ", courses);
+        // Get the course enrollments data
         
-        // Add row to table model
-        tableModel.addRow(new Object[]{studentId, studentName, coursesStr});
+        Map<String, ArrayList<String>> courseList = CourseEnrollmentPanel.courseEnrollments;
+        // Iterate through the course enrollments data and add rows to the table model
+        for (Map.Entry<String, ArrayList<String>> entry : courseList.entrySet()) {
+            String studentId = entry.getKey();
+            System.err.println("studentId " + studentId);
+            ArrayList<String> courses = entry.getValue();
+            String studentName = StudentManagementPanel.studentMap.get(studentId);
+            System.err.println("studentName: " + studentName);
+            String coursesStr = String.join(", ", courses);
+            
+            // Add row to table model
+            model.addRow(new Object[]{studentId, studentName, coursesStr});
+        }
     }
-}
-
-
-
+    
+    
+    
 
 }

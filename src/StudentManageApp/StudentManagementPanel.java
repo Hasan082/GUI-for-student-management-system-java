@@ -440,15 +440,12 @@ private void updateStudent() {
     
     
     private void updateStudentTable() {
-    DefaultTableModel model = (DefaultTableModel) StudentTable.getModel();
-    model.setRowCount(0);
-    for (String id : studentMap.keySet()) {
-        model.addRow(new Object[]{id, studentMap.get(id)});
+        DefaultTableModel model = (DefaultTableModel) StudentTable.getModel();
+        model.setRowCount(0);
+        for (String id : studentMap.keySet()) {
+            model.addRow(new Object[]{id, studentMap.get(id)});
+        }
     }
-    
-    
-    
-}
 
     private void UpdateInfotoHashMap() {
         String updatedId = findId.getText();
