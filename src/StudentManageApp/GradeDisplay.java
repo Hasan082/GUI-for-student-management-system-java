@@ -1,5 +1,6 @@
 package StudentManageApp;
 
+
 import javax.swing.JFrame;
 
 /**
@@ -7,6 +8,7 @@ import javax.swing.JFrame;
  * @author hasan
  */
 public class GradeDisplay extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form GradeDisplay

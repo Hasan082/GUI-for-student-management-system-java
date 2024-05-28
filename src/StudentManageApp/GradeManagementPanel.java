@@ -2,16 +2,18 @@ package StudentManageApp;
 
 import static StudentManageApp.EnrolledListDisplay.courseList;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hasan
  */
 public class GradeManagementPanel extends javax.swing.JFrame {
-
+    public static Map<String, Map<String, String>> studentGrades = new HashMap<>();
     /**
      * Creates new form GradeManagementPanel
      */
@@ -39,11 +41,11 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         gradeStudentlist = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        gradeCourse = new javax.swing.JComboBox<>();
-        grade = new javax.swing.JTextField();
+        gradeCourseSelected = new javax.swing.JComboBox<>();
+        gradeField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         AssignGradeButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ViewGradeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(950, 592));
@@ -70,7 +72,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
 
         jLabel3.setText("Course: ");
 
-        gradeCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gradeCourseSelected.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Grade:");
 
@@ -82,11 +84,11 @@ public class GradeManagementPanel extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jButton1.setText("View Grade List");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ViewGradeBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        ViewGradeBtn.setText("View Grade List");
+        ViewGradeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ViewGradeBtnActionPerformed(evt);
             }
         });
 
@@ -120,12 +122,12 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(gradeCourse, 0, 245, Short.MAX_VALUE)
-                            .addComponent(grade))))
+                            .addComponent(gradeCourseSelected, 0, 245, Short.MAX_VALUE)
+                            .addComponent(gradeField))))
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(352, 352, 352)
-                .addComponent(jButton1)
+                .addComponent(ViewGradeBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,15 +144,15 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(gradeStudentlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(gradeCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gradeCourseSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(grade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gradeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(52, 52, 52)
                 .addComponent(AssignGradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ViewGradeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
         );
 
@@ -175,7 +177,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_BackbuttonActionPerformed
 
     private void AssignGradeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignGradeButtonActionPerformed
-        
+        assignGrade();
     }//GEN-LAST:event_AssignGradeButtonActionPerformed
 
     private void gradeStudentlistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeStudentlistActionPerformed
@@ -187,11 +189,11 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_gradeStudentlistActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ViewGradeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGradeBtnActionPerformed
         GradeDisplay gd = new GradeDisplay();
         gd.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ViewGradeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,10 +231,10 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AssignGradeButton;
     private javax.swing.JButton Backbutton;
-    private javax.swing.JTextField grade;
-    private javax.swing.JComboBox<String> gradeCourse;
+    private javax.swing.JButton ViewGradeBtn;
+    private javax.swing.JComboBox<String> gradeCourseSelected;
+    private javax.swing.JTextField gradeField;
     private javax.swing.JComboBox<String> gradeStudentlist;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,7 +274,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     
     private void populateCourseDropdownForStudent(String studentId) {
         // Clear the course dropdown
-        gradeCourse.removeAllItems();
+        gradeCourseSelected.removeAllItems();
 
         // Get the courses for the selected student
         ArrayList<String> courses = CourseEnrollmentPanel.courseEnrollments.get(studentId);
@@ -280,10 +282,30 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         // Populate the course dropdown with the retrieved courses
         if (courses != null) {
             for (String course : courses) {
-                gradeCourse.addItem(course);
+                gradeCourseSelected.addItem(course);
             }
         }
     }
+    
+    
+    private void assignGrade() {
+    String student = (String) gradeStudentlist.getSelectedItem();
+    String studentId = student.split(":")[0]; // Extract student ID
+    String subject = (String) gradeCourseSelected.getSelectedItem();
+    String grade = gradeField.getText(); // Assume there's a text field for the grade
+
+    if (studentId != null && subject != null && !grade.isEmpty()) {
+        studentGrades.putIfAbsent(studentId, new HashMap<>());
+        Map<String, String> subjectGrades = studentGrades.get(studentId);
+        subjectGrades.put(subject, grade);
+        studentGrades.put(studentId, subjectGrades);
+        System.out.println(studentGrades);
+        JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a grade.");
+    }
+}
+
     
     
 
