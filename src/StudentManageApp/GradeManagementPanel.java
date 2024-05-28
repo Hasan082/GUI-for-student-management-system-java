@@ -102,7 +102,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Backbutton)
-                        .addGap(231, 231, 231)
+                        .addGap(236, 236, 236)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -116,7 +116,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(29, 29, 29)
                         .addComponent(gradeStudentlist, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
@@ -137,7 +137,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Backbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -151,7 +151,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(52, 52, 52)
                 .addComponent(AssignGradeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(ViewGradeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
         );
@@ -290,16 +290,22 @@ public class GradeManagementPanel extends javax.swing.JFrame {
     //method for assign Grade
     private void assignGrade() {
         String student = (String) gradeStudentlist.getSelectedItem();
-        String studentId = student.split(":")[0]; // Extract student ID
+        String studentId = student.split(":")[0];//Retrive student ID
         String subject = (String) gradeCourseSelected.getSelectedItem();
-        String grade = gradeField.getText(); // Assume there's a text field for the grade
+        String grade = gradeField.getText();
 
         if (studentId != null && subject != null && !grade.isEmpty()) {
-            studentGrades.putIfAbsent(studentId, new HashMap<>());
-            Map<String, String> subjectGrades = studentGrades.get(studentId);
-            subjectGrades.put(subject, grade);
-            studentGrades.put(studentId, subjectGrades);
-            JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+            if(Double.parseDouble(grade)>= 0 && Double.parseDouble(grade) <= 4.0) {
+                studentGrades.putIfAbsent(studentId, new HashMap<>());
+                Map<String, String> subjectGrades = studentGrades.get(studentId);
+                subjectGrades.put(subject, grade);
+                studentGrades.put(studentId, subjectGrades);
+                JOptionPane.showMessageDialog(this, "Grade assigned successfully!");
+                gradeField.setText("");
+            }else {
+                JOptionPane.showMessageDialog(this, "Grade must be >= 0 or <=4.0");
+            }
+            
         } else {
             JOptionPane.showMessageDialog(this, "Please select a student, subject and enter a grade.");
         }

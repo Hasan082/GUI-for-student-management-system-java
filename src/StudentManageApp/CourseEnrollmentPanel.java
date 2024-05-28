@@ -279,7 +279,6 @@ public class CourseEnrollmentPanel extends javax.swing.JFrame {
             }
             courseEnrollments.put(studentId, enrolledCourses);
             JOptionPane.showMessageDialog(this, "Student enrolled successfully!");
-            studentList.clearSelection();
         } else {
             JOptionPane.showMessageDialog(this, "Please select both a student and a course.");
         }
