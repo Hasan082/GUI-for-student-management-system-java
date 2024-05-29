@@ -295,6 +295,7 @@ public class GradeManagementPanel extends javax.swing.JFrame {
         String grade = gradeField.getText();
 
         if (studentId != null && subject != null && !grade.isEmpty()) {
+            
             if(Double.parseDouble(grade)>= 0 && Double.parseDouble(grade) <= 4.0) {
                 studentGrades.putIfAbsent(studentId, new HashMap<>());
                 Map<String, String> subjectGrades = studentGrades.get(studentId);
